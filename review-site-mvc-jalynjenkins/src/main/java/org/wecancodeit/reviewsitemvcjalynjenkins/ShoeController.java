@@ -20,10 +20,8 @@ public class ShoeController {
     }
 
     @RequestMapping("/shoe")
-    public String findOneShoe(@RequestParam(value ="id") Long id, Model model){
+    public String findOneShoe(@RequestParam(value ="id") Long id, Model model) throws ShoeNotFoundException {
         model.addAttribute("shoeModel", shoeRepo.findOne(id));
         return "shoeTemplate";
-
-
     }
 }

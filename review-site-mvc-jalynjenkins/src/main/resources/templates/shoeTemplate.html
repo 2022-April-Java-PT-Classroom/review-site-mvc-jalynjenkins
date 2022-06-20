@@ -1,9 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-</head>
+    <title th:text="${shoeModel.name}"></title>
+    <link rel="stylesheet" type="text/css" href="./shoe.css"></link>
+    </head>
 <body>
+<header>
+    <h1 th:text="${shoeModel.name}"></h1>
+</header>
+<main>
+    <h3>About</h3>
+    <h3 th:text="${shoeModel.description}"></h3>
+    <h3>Release Year: </h3>
+    <h3 th:text="${shoeModel.year}"></h3>
+    <h3>Designer: </h3>
+    <h3 th:text="${shoeModel.designer}"></h3>
+    <h3>Original Price: </h3>
+    <h3 th:text="${shoeModel.ogPrice}"></h3>
+    <h3>Current Price: </h3>
+    <h3 th:text="${shoeModel.nwPrice}" ></h3>
+</main>
+<nav>
+    <a th:href="@{/shoes}">Home</a>
+    </nav>
+<footer>
+    <small> &copy 2022 Box'd Out Sneakers </small>
+</footer>
 </body>
 </html>

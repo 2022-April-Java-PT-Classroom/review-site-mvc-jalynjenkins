@@ -17,30 +17,30 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(ShoeController.class)
     public class ShoeControllerMvcTest {
 
-        @Autowired
-        private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-        @MockBean
-        private ShoeRepository shoeRepo;
+    @MockBean
+    private ShoeRepository shoeRepo;
 
-        @Mock
-        private Shoe shoeOne;
+    @Mock
+    private Shoe shoeOne;
 
-        @Mock
-        private Shoe shoeTwo;
+    @Mock
+    private Shoe shoeTwo;
 
-        @Mock
-        private Shoe shoeThree;
+    @Mock
+    private Shoe shoeThree;
 
-        @Test
-        public void shouldBeOkForAllShoesInTheShoesTemplate() throws Exception {
-            mockMvc.perform(get("/shoes")).andExpect(status().isOk())
-                    .andExpect(view().name("shoesTemplate"));
-        }
+    @Test
+    public void shouldBeOkForAllShoesInTheShoesTemplate() throws Exception {
+        mockMvc.perform(get("/shoes")).andExpect(status().isOk())
+                .andExpect(view().name("shoesTemplate"));
+    }
 
     @Test
     public void shouldFindAllShoesInModel() throws Exception {
-        Collection<Shoe> allShoesInModel = Arrays.asList(shoeOne, shoeTwo);
+        Collection<Shoe> allShoesInModel = Arrays.asList(shoeOne, shoeTwo, shoeThree);
         when(shoeRepo.findAll()).thenReturn(allShoesInModel);
         mockMvc.perform(get("/shoes"))
                 .andExpect(model().attribute("shoesModel", allShoesInModel));
@@ -48,22 +48,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     public void shouldBeOkForOneShoeInTheShoeTemplate() throws Exception {
+        Long shoeOneId = 1L;
         mockMvc.perform(get("/shoe?id=1")).andExpect(status().isOk())
                 .andExpect(view().name("shoeTemplate"));
     }
 
     @Test
-    public void shouldFindOneShoeInModel() throws Exception {
+    public void shouldFindShoeOneInModel() throws Exception {
         Long shoeOneId = 1L;
         when(shoeRepo.findOne(shoeOneId)).thenReturn(shoeOne);
         mockMvc.perform(get("/shoe?id=1"))
                 .andExpect(model().attribute("shoeModel", shoeOne));
     }
-
-
-
-
-
-
-    }
+}
 
